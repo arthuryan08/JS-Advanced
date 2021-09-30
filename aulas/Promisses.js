@@ -4,32 +4,31 @@ function rand (min, max){
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-function esperaAi (msg, tempo) {
+function waitAMoment (msg, time) {
   return new Promise((resolve, reject) => {
     if (typeof msg !== 'string') reject('BAD VALUE');
 
     setTimeout(() => {
       resolve(msg);
-    }, tempo);
+    }, time);
   });
 }
-
-esperaAi('Conexão com o BD.', rand(1, 3))
-  .then(resposta => {
-    console.log(resposta);
-    return esperaAi('Buscando dados da BASE', rand(1, 3))
+ waitAMoment('Database conection.', rand(1, 3))
+  .then(response => {
+    console.log(response);
+    return waitAMoment('Search data in database.', rand(1, 3))
   })
-  .then(resposta => {
-    console.log(resposta);
-    return esperaAi(2222, rand(1, 3))
+  .then(response => {
+    console.log(response);
+    return waitAMoment(2222, rand(1, 3))
   })
-  .then(resposta => {
-    console.log(resposta);
+  .then(response => {
+    console.log(response);
   }).then(() => {
-    console.log('Exibe dados na tela')
+    console.log('Show data on screen')
   })
   .catch(e => {
-    console.log('ERRO:', e)
+    console.log('ERROR:', e)
   });
 
 console.log('Isso aqui será exibido antes de qualquer Promise.')
